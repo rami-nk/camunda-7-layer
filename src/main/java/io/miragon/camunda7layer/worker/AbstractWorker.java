@@ -1,38 +1,37 @@
-package io.miragon.camunda7layer.integration;
+package io.miragon.camunda7layer.worker;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.miragon.camunda7layer.service.IPreCheckService;
-import io.miragon.camunda7layer.service.PreCheckCommand;
 import jakarta.annotation.PostConstruct;
-import lombok.AllArgsConstructor;
 import org.camunda.bpm.client.ExternalTaskClient;
-import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-@Service
-@AllArgsConstructor
-public class CamundaService {
+public abstract class AbstractWorker {
 
     private final ExternalTaskClient externalTaskClient;
-
-    private final IPreCheckService preCheckService;
-
     private final CamundaDataMapper camundaDataMapper;
+    private final String topic;
+
+    public AbstractWorker(ExternalTaskClient externalTaskClient, CamundaDataMapper camundaDataMapper, String topic) {
+        this.externalTaskClient = externalTaskClient;
+        this.camundaDataMapper = camundaDataMapper;
+        this.topic = topic;
+    }
+
+    public abstract void execute(Map<String, Object> data);
 
     @PostConstruct
-    public void subscribe() {
-        externalTaskClient.subscribe("preCheck")
+    public void _subscribe() {
+        externalTaskClient.subscribe(topic)
                 .lockDuration(1000)
                 .handler((externalTask, externalTaskService) -> {
 
                     // map engine data to PreCheckCommand object
                     final Map<String, Object> data = camundaDataMapper.mapFromEngineData(externalTask.getAllVariablesTyped());
-                    final Object mappedData = this.mapInput(PreCheckCommand.class, data);
 
-                    // call use case
-                    preCheckService.preCheck((PreCheckCommand) mappedData);
+                    // execute use case
+                    execute(data);
 
                     // complete task
                     externalTaskService.complete(externalTask);
@@ -40,7 +39,7 @@ public class CamundaService {
                 .open();
     }
 
-    private Object mapInput(final Class<?> inputType, final Object object) {
+    protected Object mapInput(final Class<?> inputType, final Object object) {
         final ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper.convertValue(object, inputType);
