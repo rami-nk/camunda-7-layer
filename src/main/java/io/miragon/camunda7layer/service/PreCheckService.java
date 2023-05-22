@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 public class PreCheckService implements IPreCheckService {
 
     @Override
-    public void preCheck(PreCheckCommand preCheckCommand) {
+    public void preCheck(PreCheckData preCheckData) {
         log.info("Checking credit request for {} {} with age {} and income {}",
-                preCheckCommand.getFirstname(),
-                preCheckCommand.getLastname(),
-                preCheckCommand.getAge(),
-                preCheckCommand.getIncome()
+                preCheckData.getFirstname(),
+                preCheckData.getLastname(),
+                preCheckData.getAge(),
+                preCheckData.getIncome()
         );
         try {
             Thread.sleep(5000);

@@ -1,7 +1,7 @@
 package io.miragon.camunda7layer.worker;
 
 import io.miragon.camunda7layer.service.IPreCheckService;
-import io.miragon.camunda7layer.service.PreCheckCommand;
+import io.miragon.camunda7layer.service.PreCheckData;
 import org.camunda.bpm.client.ExternalTaskClient;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +20,9 @@ public class PreCheckWorker extends AbstractWorker {
     @Override
     public void execute(Map<String, Object> data) {
         // map engine data to PreCheckCommand object
-        final Object mappedData = this.mapInput(PreCheckCommand.class, data);
+        final Object mappedData = this.mapInput(PreCheckData.class, data);
 
         // call use case
-        preCheckService.preCheck((PreCheckCommand) mappedData);
+        preCheckService.preCheck((PreCheckData) mappedData);
     }
 }

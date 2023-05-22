@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PreCheckCommand {
+public class PreCheckData {
 
     private String firstname;
 
