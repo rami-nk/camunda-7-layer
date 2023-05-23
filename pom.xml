@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.0</version>
+        <version>2.7.9</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -22,6 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>3.1.0</spring.boot.version>
         <camunda7.version>7.18.0</camunda7.version>
+        <flowable.version>6.6.0</flowable.version>
     </properties>
 
     <dependencies>
@@ -36,17 +37,24 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- H2 Database -->
         <dependency>
-            <groupId>org.camunda.bpm</groupId>
-            <artifactId>camunda-external-task-client</artifactId>
-            <version>${camunda7.version}</version>
-            <scope>provided</scope>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Flowable -->
+        <dependency>
+            <groupId>org.flowable</groupId>
+            <artifactId>flowable-spring-boot-starter</artifactId>
+            <version>${flowable.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.camunda.community</groupId>
-            <artifactId>camunda-engine-rest-client-complete-springboot-starter</artifactId>
-            <version>${camunda7.version}</version>
+            <groupId>org.flowable</groupId>
+            <artifactId>flowable-spring-boot-starter-rest</artifactId>
+            <version>${flowable.version}</version>
         </dependency>
 
         <dependency>
