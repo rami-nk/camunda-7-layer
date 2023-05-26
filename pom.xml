@@ -4,9 +4,9 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.miragon</groupId>
-    <artifactId>camunda-7-layer</artifactId>
+    <artifactId>process-automation-integration-layer-architecture</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>camunda-7-layer</name>
+    <name>process-automation-integration-layer-architecture</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
