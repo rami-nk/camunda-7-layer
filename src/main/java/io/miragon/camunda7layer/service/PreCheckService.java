@@ -5,9 +5,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class PreCheckService implements IPreCheckService {
+public class PreCheckService {
 
-    @Override
     public void preCheck(PreCheckData preCheckData) {
         log.info("Checking credit request for {} {} with age {} and income {}",
                 preCheckData.getFirstname(),
