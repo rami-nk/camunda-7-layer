@@ -1,4 +1,4 @@
-package io.miragon.layer.service;
+package io.miragon.layer.service.bookavailablity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,13 +9,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PreCheckData {
+public class BookAvailabilityData {
 
-    private String firstname;
+    private String title;
 
-    private String lastname;
+    private String author;
 
-    private int age;
-
-    private int income;
+    private String isbn;
 }
