@@ -1,11 +1,11 @@
-package io.miragon.layer.api;
+package io.miragon.layer.api.worker;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.miragon.layer.service.bookavailablity.BookAvailabilityData;
-import io.miragon.layer.service.bookavailablity.CheckBookAvailabilityService;
+import io.miragon.layer.service.prepareshipment.PrepareShipmentData;
+import io.miragon.layer.service.prepareshipment.PrepareShipmentService;
 import lombok.AllArgsConstructor;
 import org.camunda.bpm.client.spring.annotation.ExternalTaskSubscription;
 import org.camunda.bpm.client.task.ExternalTask;
@@ -21,26 +21,22 @@ import java.util.Map;
 
 @Component
 @AllArgsConstructor
-@ExternalTaskSubscription("checkBookAvailability")
-public class CheckBookAvailabilityWorker implements ExternalTaskHandler {
+@ExternalTaskSubscription("prepareShipment")
+public class PrepareShipmentWorker implements ExternalTaskHandler {
 
-    private final CheckBookAvailabilityService checkBookAvailabilityService;
+    private final PrepareShipmentService prepareShipmentService;
 
     @Override
     public void execute(ExternalTask externalTask, ExternalTaskService externalTaskService) {
         // map engine data to PreCheckCommand object
         final Map<String, Object> data = mapFromEngineData(externalTask.getAllVariablesTyped());
-        final BookAvailabilityData mappedData = this.mapInput(BookAvailabilityData.class, data);
+        final PrepareShipmentData mappedData = this.mapInput(PrepareShipmentData.class, data);
 
         // execute use case
-        var result = checkBookAvailabilityService.checkAvailability(mappedData);
-
-        // map result to engine data
-        final VariableMap variables = externalTask.getAllVariablesTyped();
-        variables.put("available", result.isAvailable());
+        prepareShipmentService.prepareShipment(mappedData);
 
         // complete task
-        externalTaskService.complete(externalTask, variables);
+        externalTaskService.complete(externalTask);
     }
 
     private Map<String, Object> mapFromEngineData(final VariableMap variables) {

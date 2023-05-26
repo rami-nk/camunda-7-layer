@@ -50,6 +50,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.camunda.community</groupId>
+            <artifactId>camunda-engine-rest-client-openapi-springboot</artifactId>
+            <version>${camunda7.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
