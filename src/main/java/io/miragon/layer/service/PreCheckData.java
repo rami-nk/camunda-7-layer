@@ -1,4 +1,4 @@
-package io.miragon.camunda7layer.service;
+package io.miragon.layer.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

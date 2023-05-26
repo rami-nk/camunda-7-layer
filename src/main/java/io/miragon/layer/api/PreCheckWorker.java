@@ -1,11 +1,11 @@
-package io.miragon.camunda7layer.api;
+package io.miragon.layer.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.miragon.camunda7layer.service.PreCheckData;
-import io.miragon.camunda7layer.service.PreCheckService;
+import io.miragon.layer.service.PreCheckData;
+import io.miragon.layer.service.PreCheckService;
 import lombok.AllArgsConstructor;
 import org.camunda.bpm.client.spring.annotation.ExternalTaskSubscription;
 import org.camunda.bpm.client.task.ExternalTask;

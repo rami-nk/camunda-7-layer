@@ -1,4 +1,4 @@
-package io.miragon.camunda7layer;
+package io.miragon.layer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
