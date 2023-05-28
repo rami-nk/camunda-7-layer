@@ -1,3 +1,0 @@
-org.camunda.bpm.client.spring.boot.starter.impl.ClientAutoConfiguration
-org.camunda.community.rest.client.springboot.CamundaOpenApiStarter
-org.camunda.community.rest.client.springboot.CamundaApi
