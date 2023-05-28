@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("")
+@RequestMapping
 @AllArgsConstructor
-public class CustomerMessageController {
+public class CamundaCustomerMessageController {
 
     private final MessageApi messageApi;
 
